@@ -2,20 +2,39 @@
 //add to vorpal cmd: play() with <move> (rock, paper, siccsors) log invalid move, don't throw error if not one of them.
 //if one of them, randomly play coputer move.
 const vorpal=require('vorpal')
-
-const cli = vorpal()
+cli=vorpal()
+const { Config } = require('./Config')
+const config=new Config('./config.json').rules.rules
+console.log(config)
+const arrRules=Object.keys(config)
 cli.command('play <move>','description').action( function(args, callback) {
-  if(args[move]!='rock'&&args[move]!='scissors'&&args[move]!='paper'){
+
+  if(config[args["move"]]==undefined){
     this.log("Invalid move")
   }
   else{
-    this.log("random computer move")
+    this.log("random computer move:")
+    const compMove=arrRules[Math.round(Math.random() * 2)]
+    this.log(compMove)
+    if(config[compMove]==args["move"]){
+      this.log("You lose")
+
+    }
+    else if (config[args["move"]]==compMove){
+      this.log("You win!")
+
+    }
+    else if(args["move"]==compMove){
+      this.log('Tie!')
+    }
+
   }
-    this.log('bar');
+
     callback();
-  });
+  })
+
+  cli.show()
 
   module.exports = {
     cli
   }
-return cli

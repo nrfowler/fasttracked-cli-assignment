@@ -1,6 +1,3 @@
-//vorpal code, but not showing vorpal consider
-//add to vorpal cmd: play() with <move> (rock, paper, siccsors) log invalid move, don't throw error if not one of them.
-//if one of them, randomly play coputer move.
 const vorpal=require('vorpal')
 cli=vorpal()
 const { Config } = require('./Config')

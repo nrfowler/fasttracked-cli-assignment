@@ -1,5 +1,5 @@
 
 
-const bb=require('./cli.js')
+const temp=require('./cli.js')
 
-bb.cli.show()
+temp.cli.show()

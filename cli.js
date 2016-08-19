@@ -1,27 +1,27 @@
 const vorpal=require('vorpal')
 cli=vorpal()
 const { Config } = require('./Config')
-const config=new Config('./config.json').rules.rules
-console.log(config)
-const arrRules=Object.keys(config)
+const beats=new Config('./config.json').rules.rules
+console.log(beats)
+const arrRules=Object.keys(beats)
 cli.command('play <move>','description').action( function(args, callback) {
-
-  if(config[args["move"]]==undefined){
+const yourMove=args["move"]
+  if(beats[yourMove]==undefined){
     this.log("Invalid move")
   }
   else{
     this.log("random computer move:")
     const compMove=arrRules[Math.round(Math.random() * 2)]
     this.log(compMove)
-    if(config[compMove]==args["move"]){
-      this.log("You lose")
+    if(beats[compMove]==yourMove){
+      this.log("You lose...")
 
     }
-    else if (config[args["move"]]==compMove){
+    else if (beats[yourMove]==compMove){
       this.log("You win!")
 
     }
-    else if(args["move"]==compMove){
+    else if(yourMove==compMove){
       this.log('Tie!')
     }
 
